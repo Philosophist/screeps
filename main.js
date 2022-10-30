@@ -2,6 +2,9 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
+
+//This is a comment I'm adding.
+
 if(!(Memory.numUpgraders > 0)) {
 	Memory.numHarvesters = 2;
 	Memory.numBuilders = 1;
