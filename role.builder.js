@@ -2,6 +2,7 @@ var roleBuilder = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+        // This is Steve's comment 
 		if(creep.building == undefined){
 			creep.building == false;
 		}
