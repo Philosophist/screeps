@@ -2,7 +2,7 @@ var roleBuilder = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        // This is Steve's comment 
+        creep.working = true;
 		if(creep.building == undefined){
 			creep.building == false;
 		}
@@ -50,6 +50,7 @@ var roleBuilder = {
                 creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
+        creep.working = false;
     }
 };
 

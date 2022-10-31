@@ -2,6 +2,7 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+        creep.working = true;
 		if(creep.upgrading == undefined){
 			creep.upgrading == false;
 		}
@@ -50,6 +51,7 @@ var roleUpgrader = {
                 creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
+        creep.working = true;
     }
 };
 

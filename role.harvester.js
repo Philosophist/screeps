@@ -2,6 +2,7 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+        creep.working = true;
         if(creep.store.getFreeCapacity() > 0) {
             var sources = creep.room.find(FIND_SOURCES);
 			
@@ -37,6 +38,7 @@ var roleHarvester = {
 				}
 			}
         }
+        creep.working = false;
     }
 };
 
