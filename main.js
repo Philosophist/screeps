@@ -33,7 +33,7 @@ module.exports.loop = function () {
         }
     }
 
-    if(!Game.spawns['Spawn1'].spawning) {
+    if(!Game.spawns['Spawn1'].spawning && Game.spawns.Spawn1.energy > 299) {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         console.log('Harvesters: ' + harvesters.length);
         console.log('Harvester target: ' + Memory.numHarvesters);
