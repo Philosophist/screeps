@@ -2,10 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
-
-//This is a comment I'm adding.
-
-if(Game.time > 100) {
+if(Game.time < 500) {
 	Memory.numHarvesters = 2;
 	Memory.numBuilders = 1;
 	Memory.numUpgraders = 1;
