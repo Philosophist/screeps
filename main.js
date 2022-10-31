@@ -3,9 +3,9 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
 if(Game.time < 500) {
-	Memory.numHarvesters = 2;
-	Memory.numBuilders = 1;
-	Memory.numUpgraders = 1;
+	Memory.numHarvesters = 3;
+	Memory.numBuilders = 3;
+	Memory.numUpgraders = 3;
 }
 
 module.exports.loop = function () {
@@ -71,7 +71,7 @@ module.exports.loop = function () {
             }
         }
     }
-    else {
+    else if(Game.spawns['Spawn1'].spawning){
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
         Game.spawns['Spawn1'].room.visual.text(
             '🛠️' + spawningCreep.memory.role,
