@@ -5,7 +5,7 @@ var roleHarvester = {
         creep.memory.running = true;
         var storageRemaining = creep.store.getFreeCapacity();
         if(creep.store[RESOURCE_ENERGY] == 0) {
-            creep.memory.working == false;
+            creep.memory.working = false;
         }
         if(creep.memory.working) {
             var targets = creep.room.find(FIND_STRUCTURES, {
