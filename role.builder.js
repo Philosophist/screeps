@@ -2,23 +2,12 @@ var roleBuilder = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        creep.working = true;
-		if(creep.building == undefined){
-			creep.building == false;
-		}
-		
-        if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
-            creep.memory.building = false;
-            creep.say('🔄 harvest');
-        }
-        if(!creep.memory.building && creep.store.getFreeCapacity() == 0) {
-            creep.memory.building = true;
-            creep.say('🚧 build');
-        }
+        creep.memory.running = true;
+		var storageRemaining = creep.store.getFreeCapacity()
 
         if(creep.memory.building) {
             var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            if(targets.length) {
+            if(targets.length > 0) {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
@@ -30,16 +19,18 @@ var roleBuilder = {
 							structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
 					}
 				});
-				if(targets.length) {
+				if(targets.length > 0) {
 					Memory.numBuilders -= 1;
 					creep.memory.role = 'harvester';
 					Memory.numHarvesters += 1;
+                    creep.memory.running = false;
 					return;
 				}
 				else {
 					Memory.numBuilders -= 1;
 					creep.memory.role = 'upgrader';
 					Memory.numUpgraders += 1;
+                    creep.memory.running = false;
 					return;
 				}
 			}
@@ -50,7 +41,17 @@ var roleBuilder = {
                 creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
-        creep.working = false;
+
+        if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
+            creep.memory.building = false;
+            creep.say('🔄 harvest');
+        }
+        if(!creep.memory.building && creep.store.getFreeCapacity() == 0) {
+            creep.memory.building = true;
+            creep.say('🚧 build');
+        }
+        
+        creep.memory.running = false;
     }
 };
 

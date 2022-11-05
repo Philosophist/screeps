@@ -2,11 +2,9 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        creep.working = true;
-		if(creep.upgrading == undefined){
-			creep.upgrading == false;
-		}
-		
+        creep.memory.running = true;
+        var storageRemaining = creep.store.getFreeCapacity();
+
 		if(Memory.numUpgraders > 1) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -14,20 +12,22 @@ var roleUpgrader = {
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
-            if(targets.length) {
+            if(targets.length > 0) {
 				Memory.numUpgraders -= 1;
 				creep.memory.role = 'harvester';
-				Memory.numHarvesters += 1;
+				Memory.numHarvesters += 1;                
+                creep.memory.running = false;
 				return;
             }
 			else {
 				var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-				if(targets.length) {
+				if(targets.length > 0) {
 					Memory.numUpgraders -= 1;
 					creep.memory.role = 'builder';
 					Memory.numBuilders += 1;
+                    creep.memory.running = false;
+                    return;
 				}
-				return;
 			}
 		}
 
@@ -35,7 +35,7 @@ var roleUpgrader = {
             creep.memory.upgrading = false;
             creep.say('🔄 harvest');
         }
-        if(!creep.memory.upgrading && creep.store.getFreeCapacity() == 0) {
+        if(!creep.memory.upgrading && storageRemaining == 0) {
             creep.memory.upgrading = true;
             creep.say('⚡ upgrade');
         }
@@ -51,7 +51,7 @@ var roleUpgrader = {
                 creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
-        creep.working = true;
+        creep.memory.running = false;
     }
 };
 
