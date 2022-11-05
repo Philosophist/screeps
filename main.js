@@ -49,30 +49,23 @@ module.exports.loop = function () {
     console.log('Builder target: ' + Memory.tarBuilders);
 
     if(!Game.spawns['Spawn1'].spawning && Game.spawns.Spawn1.energy > 299) {
-        
         if(harvesters.length < Memory.tarHarvesters) {
             var newName = 'Worker' + Game.time;
             console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
                 {memory: {role: 'harvester', working: false, running: false}});
         }
-        else {
-            
-            if(upgraders.length < Memory.tarUpgraders) {
-                var newName = 'Worker' + Game.time;
-                console.log('Spawning new upgrader: ' + newName);
-                Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
-                    {memory: {role: 'upgrader', working: false, running: false}});
-            }
-            else {    
-                
-                if(builders.length < Memory.tarBuilders) {
-                    var newName = 'Worker' + Game.time;
-                    console.log('Spawning new builder: ' + newName);
-                    Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
-                        {memory: {role: 'builder', working: false, running: false}}); 
-                }
-            }
+        else if(upgraders.length < Memory.tarUpgraders) {
+            var newName = 'Worker' + Game.time;
+            console.log('Spawning new upgrader: ' + newName);
+            Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
+                {memory: {role: 'upgrader', working: false, running: false}});
+        }
+        else if(builders.length < Memory.tarBuilders) {    
+            var newName = 'Worker' + Game.time;
+            console.log('Spawning new builder: ' + newName);
+            Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
+                {memory: {role: 'builder', working: false, running: false}}); 
         }
     }
     else if(Game.spawns['Spawn1'].spawning){
