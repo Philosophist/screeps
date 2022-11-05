@@ -20,16 +20,16 @@ var roleBuilder = {
 					}
 				});
 				if(targets.length > 0) {
-					Memory.numBuilders -= 1;
+					Memory.tarBuilders -= 1;
 					creep.memory.role = 'harvester';
-					Memory.numHarvesters += 1;
+					Memory.tarHarvesters += 1;
                     creep.memory.running = false;
 					return;
 				}
 				else {
-					Memory.numBuilders -= 1;
+					Memory.tarBuilders -= 1;
 					creep.memory.role = 'upgrader';
-					Memory.numUpgraders += 1;
+					Memory.tarUpgraders += 1;
                     creep.memory.running = false;
 					return;
 				}
@@ -50,7 +50,7 @@ var roleBuilder = {
             creep.memory.building = true;
             creep.say('🚧 build');
         }
-        
+
         creep.memory.running = false;
     }
 };

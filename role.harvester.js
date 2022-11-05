@@ -23,15 +23,15 @@ var roleHarvester = {
                 else {
                     var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
                     if(targets.length > 0) {
-                        Memory.numHarvesters -= 1;
+                        Memory.tarHarvesters -= 1;
                         creep.memory.role = 'builder';
-                        Memory.numBuilders += 1;
+                        Memory.tarBuilders += 1;
                         return;
                     }
                     else {
-                        Memory.numHarvesters -= 1;
+                        Memory.tarHarvesters -= 1;
                         creep.memory.role = 'upgrader';
-                        Memory.numUpgraders += 1;
+                        Memory.tarUpgraders += 1;
                         return;
                     }
                 }

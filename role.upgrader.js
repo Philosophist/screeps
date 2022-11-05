@@ -5,7 +5,7 @@ var roleUpgrader = {
         creep.memory.running = true;
         var storageRemaining = creep.store.getFreeCapacity();
 
-		if(Memory.numUpgraders > 1) {
+		if(Memory.Upgraders > 1) {
             var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
@@ -13,18 +13,18 @@ var roleUpgrader = {
                 }
             });
             if(targets.length > 0) {
-				Memory.numUpgraders -= 1;
+				Memory.tarUpgraders -= 1;
 				creep.memory.role = 'harvester';
-				Memory.numHarvesters += 1;                
+				Memory.tarHarvesters += 1;                
                 creep.memory.running = false;
 				return;
             }
 			else {
 				var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
 				if(targets.length > 0) {
-					Memory.numUpgraders -= 1;
+					Memory.tarUpgraders -= 1;
 					creep.memory.role = 'builder';
-					Memory.numBuilders += 1;
+					Memory.tarBuilders += 1;
                     creep.memory.running = false;
                     return;
 				}
